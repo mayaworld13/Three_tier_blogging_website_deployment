@@ -11,6 +11,10 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
 
 https://github.com/mayaworld13/wanderlust_three_tier_deploment/assets/127987256/00d2f805-c760-484a-807b-d6f0966d06ee
 
+ 
+## End to End CICD
+![Screenshot 2024-05-11 154144](https://github.com/mayaworld13/Three_tier_blogging_website_deployment/assets/127987256/ce711337-d796-4493-a9f2-63cc49b0463d)
+
 
 ## Setting up the project locally
 
