@@ -26,7 +26,7 @@ jobs:
           # Connect to EC2 and run deployment commands
           ssh -o StrictHostKeyChecking=no -i private_key.pem $EC2_USER@$EC2_HOST << 'EOF'
             # Navigate to project folder and pull latest changes
-            
+            rm -rf Three_tier_blogging_website_deployment
             git clone https://github.com/mayaworld13/Three_tier_blogging_website_deployment.git /home/ubuntu/Three_tier_blogging_website_deployment
             cd /home/ubuntu/Three_tier_blogging_website_deployment
             git pull origin main
