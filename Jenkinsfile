@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage("Code ") {
+        stage("Code") {
             steps {
                 git url: "https://github.com/mayaworld13/wanderlust_three_tier_deployment.git", branch: "main"
             }
