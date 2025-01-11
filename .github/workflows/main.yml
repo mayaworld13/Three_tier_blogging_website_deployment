@@ -26,8 +26,9 @@ jobs:
           # Connect to EC2 and run deployment commands
           ssh -o StrictHostKeyChecking=no -i private_key.pem $EC2_USER@$EC2_HOST << 'EOF'
             # Navigate to project folder and pull latest changes
-            cd /home/ubuntu/Three_tier_blogging_website_deployment
+            
             git pull origin main
+            cd /home/ubuntu/Three_tier_blogging_website_deployment
             chmod +x shellscript.sh
             ./shellscript.sh
 
