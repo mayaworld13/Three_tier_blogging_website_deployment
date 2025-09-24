@@ -41,6 +41,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          
       # ---- Build Frontend Artifact ----
       - name: Build Frontend
         run: |
@@ -48,9 +49,7 @@ jobs:
           npm run build
           
 
-      - name: List Frontend Directory
-        run: ls -R frontend
-
+      
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
