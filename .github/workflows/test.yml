@@ -46,10 +46,15 @@ jobs:
         run: |
           cd frontend
           npm run build
+          
 
-      # ---- Upload Artifact ----
+      - name: List Frontend Directory
+        run: ls -R frontend
+
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: frontend-build
-          path: frontend/build # Or frontend/dist depending on your framework
+          name: frontend-dist
+          path: frontend/dist
+
+    
