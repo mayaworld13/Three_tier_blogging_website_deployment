@@ -1,7 +1,16 @@
 {
-  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "allowImportingTsExtensions": false,
-    "moduleResolution": "node"
-  }
+    "target": "ES2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src/**/*",
+    "components/**/*",
+    "pages/**/*"
+  ]
 }
