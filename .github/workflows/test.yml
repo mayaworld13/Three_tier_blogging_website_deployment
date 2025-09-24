@@ -22,6 +22,11 @@ jobs:
           npm install
           npm install --save-dev typescript@latest
 
+      - name: Install Backend Dependencies
+        run: |
+          cd backend
+          npm install
+
       # ---- SonarQube Analysis (Frontend) ----
       - name: SonarQube Scan Frontend (Azure VM)
         uses: sonarsource/sonarqube-scan-action@v2
