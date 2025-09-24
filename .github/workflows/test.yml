@@ -15,17 +15,26 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      # Install Dependencies (including TypeScript)
+      - name: Install Dependencies
+        run: |
+          cd frontend
+          npm install
+          npm install --save-dev typescript@latest
+
       # ---- SonarQube Analysis ----
       - name: SonarQube Scan (Azure VM)
-        uses: sonarsource/sonarqube-scan-action@v1.0.0
+        uses: sonarsource/sonarqube-scan-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
           args: >
             -Dsonar.projectKey=wonderlust
-           
-            
+            -Dsonar.organization=mayaworld13
+            -Dsonar.typescript.tsconfigPath=frontend/tsconfig.sonar.json
+
+      # ---- Wait & Check Quality Gate ----
       - name: SonarQube Quality Gate
         uses: sonarsource/sonarqube-quality-gate-action@v1.1.0
         timeout-minutes: 5
