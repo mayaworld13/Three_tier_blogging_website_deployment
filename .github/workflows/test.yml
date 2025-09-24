@@ -1,0 +1,27 @@
+name: CI with SonarQube (Azure VM) & Snyk
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout Code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # ---- SonarQube Analysis ----
+      - name: SonarQube Scan (Azure VM)
+        uses: sonarsource/sonarqube-scan-action@v1.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=wonderlust
+            -Dsonar.organization=mayaworld13
