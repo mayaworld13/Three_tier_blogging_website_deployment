@@ -15,24 +15,34 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Install Dependencies (including TypeScript)
-      - name: Install Dependencies
+      # Install Dependencies (Frontend)
+      - name: Install Frontend Dependencies
         run: |
           cd frontend
           npm install
           npm install --save-dev typescript@latest
 
-      # ---- SonarQube Analysis ----
-      - name: SonarQube Scan (Azure VM)
+      # ---- SonarQube Analysis (Frontend) ----
+      - name: SonarQube Scan Frontend (Azure VM)
         uses: sonarsource/sonarqube-scan-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
           args: >
-            -Dsonar.projectKey=wonderlust
-            -Dsonar.organization=mayaworld13
+            -Dsonar.projectKey=wonderlust-frontend
             -Dsonar.typescript.tsconfigPath=frontend/tsconfig.sonar.json
+
+      # ---- SonarQube Analysis (Backend) ----
+      - name: SonarQube Scan Backend (Azure VM)
+        uses: sonarsource/sonarqube-scan-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=wonderlust-backend
+            -Dsonar.sources=backend
 
       # ---- Wait & Check Quality Gate ----
       - name: SonarQube Quality Gate
@@ -41,19 +51,29 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          
+
+
       # ---- Build Frontend Artifact ----
       - name: Build Frontend
         run: |
           cd frontend
           npm run build
-          
 
-      
-      - name: Upload Build Artifact
+      - name: Upload Frontend Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: frontend-dist
           path: frontend/dist
 
-    
+      # ---- Build Backend Artifact ----
+      - name: Build Backend
+        run: |
+          cd backend
+          npm install
+          npm run build
+
+      - name: Upload Backend Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-dist
+          path: backend/dist
