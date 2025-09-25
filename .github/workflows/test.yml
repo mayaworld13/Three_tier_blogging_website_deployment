@@ -15,7 +15,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # ---- SonarQube Analysis ----
+      # ---- SonarQube Analysis ---
       - name: SonarQube Scan (Azure VM)
         uses: sonarsource/sonarqube-scan-action@v1.0.0
         env:
