@@ -2,9 +2,9 @@ name: CI with SonarQube (Azure VM) & Snyk
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   analysis:
@@ -25,3 +25,9 @@ jobs:
           args: >
             -Dsonar.projectKey=wonderlust
             -Dsonar.organization=mayaworld13
+            
+      - name: Trigger workflow in v1 branch
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          event-type: trigger-master-workflow
