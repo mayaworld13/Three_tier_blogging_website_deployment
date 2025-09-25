@@ -26,9 +26,8 @@ jobs:
             -Dsonar.projectKey=wonderlust
             -Dsonar.organization=mayaworld13
             
-      - name: Trigger workflow in v1 branch
+      - name: Trigger workflow in master branch
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.PAT_TOKEN }}
-          repository: mayaworld13/Three_tier_blogging_website_deployment
           event-type: trigger-master-workflow
