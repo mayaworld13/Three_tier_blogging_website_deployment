@@ -2,9 +2,9 @@ name: CI with SonarQube (Azure VM)
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "trigger-master-workflow" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "trigger-master-workflow" ]
 
 jobs:
   analysis:
