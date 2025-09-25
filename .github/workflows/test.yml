@@ -1,4 +1,4 @@
-name: CI with SonarQube (Azure VM)
+name: CI with SonarQube
 
 on:
   repository_dispatch:
