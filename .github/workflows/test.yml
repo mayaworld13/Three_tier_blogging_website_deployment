@@ -1,11 +1,8 @@
 name: CI with SonarQube
 
 on:
-  workflow_run:
-    workflows: ["CI with SonarQube testing"]  
-    types:
-      - completed
-
+  repository_dispatch:
+    types: [trigger-master-workflow]
   push:
     branches: [ "master" ]
  
