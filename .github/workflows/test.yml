@@ -31,5 +31,5 @@ jobs:
         with:
           token: ${{ secrets.PAT_TOKEN }}  # Ensure your token has the necessary permissions
           event-type: trigger-master-workflow
-          repository: mayaworld13/Three_tier_blogging_website_deployment
+          
           
