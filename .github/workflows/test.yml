@@ -1,4 +1,4 @@
-name: CI with SonarQube
+name: CI with SonarQube testing
 
 on:
   push:
