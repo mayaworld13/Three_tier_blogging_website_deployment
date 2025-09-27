@@ -15,23 +15,20 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # ---- SonarQube Analysis ---
-      - name: SonarQube Scan (Azure VM)
-        uses: sonarsource/sonarqube-scan-action@v1.0.0
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        with:
-          args: >
-            -Dsonar.projectKey=wonderlust
-            -Dsonar.organization=mayaworld13
-      - name: Trigger master workflow
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.PAT_TOKEN }}
-          repository: mayaworld13/Three_tier_blogging_website_deployment
-          event-type: trigger-master-workflow
-            
-      
-          
-          
+      # Install SonarScanner
+      - name: Install SonarScanner CLI
+        run: |
+          # Download and install SonarScanner
+          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+          unzip sonar-scanner-cli-4.6.2.2472-linux.zip
+          sudo mv sonar-scanner-4.6.2.2472-linux /opt/sonar-scanner
+          sudo ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
+
+      # SonarQube Scan
+      - name: SonarQube Scan (Without Docker)
+        run: |
+          sonar-scanner \
+            -Dsonar.projectKey=wonderlust \
+            -Dsonar.organization=mayaworld13 \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
